@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+var cons = require('consolidate');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,10 +33,13 @@ let customers = [
 ];
 // Käytettävä mallimoottori
 app.set('view engine', 'pug');
+// app.engine('html', cons.swig);
+//app.set('/', path.join(__dirname, 'views'));
+// app.set('view engine', 'html');
 
 // Reitit
-app.get('/hello', (req, res) => {
-  res.render('hello');
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get('/customers', (req, res) => {
